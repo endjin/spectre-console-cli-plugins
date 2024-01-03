@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+  </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Spectre.Console.Cli" Version="0.48.0" />
+    </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SpectreConsoleCliBase\SpectreConsoleCliBase.csproj">
+      <Private>false</Private>
+      <ExcludeAssets>runtime</ExcludeAssets>
+    </ProjectReference>
+  </ItemGroup>
+
+</Project>

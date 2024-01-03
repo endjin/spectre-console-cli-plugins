@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "SpectreConsoleCliPlugins": {
+      "commandName": "Project",
+      "commandLineArgs": "foo --message \"Boo!\""
+    }
+  }
+}
