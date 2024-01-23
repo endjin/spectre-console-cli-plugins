@@ -1,18 +1,17 @@
-﻿using Spectre.Console.Cli;
-
-using System;
+﻿using System;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
+using Spectre.Console.Cli;
 
 namespace FooPlugin;
 
-public class FooCommand : AsyncCommand<FooCommand.Settings>
+public class FooBarCommand : AsyncCommand<FooBarCommand.Settings>
 {
     /// <inheritdoc/>
     public override Task<int> ExecuteAsync([NotNull] CommandContext context, [NotNull] Settings settings)
     {
-        Console.WriteLine($"FooCommand says: {settings.Message}");
+        Console.WriteLine($"{nameof(FooBarCommand)} says: {settings.Message}");
 
         return Task.FromResult(0);
     }

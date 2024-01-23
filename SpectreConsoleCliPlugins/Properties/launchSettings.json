@@ -2,7 +2,7 @@
   "profiles": {
     "SpectreConsoleCliPlugins": {
       "commandName": "Project",
-      "commandLineArgs": "foo --message \"Boo!\""
+      "commandLineArgs": "foo foobar -m \"Yo!\""
     }
   }
 }

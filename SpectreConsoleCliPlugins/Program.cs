@@ -4,7 +4,6 @@ using Microsoft.Extensions.FileSystemGlobbing;
 using Microsoft.Extensions.FileSystemGlobbing.Abstractions;
 
 using Spectre.Console.Cli;
-using Spectre.Console.Cli.Unsafe;
 using Spectre.IO;
 
 using SpectreConsoleCliBase;
@@ -50,22 +49,22 @@ public class Program
 
         foreach (FileInfo file in files.DistinctBy(x => x.Name))
         {
-            PluginLoader loader = PluginLoader.CreateFromAssemblyFile(file.FullName, sharedTypes: [typeof(IPluginCommand)]);
+            PluginLoader loader = PluginLoader.CreateFromAssemblyFile(file.FullName, sharedTypes: [typeof(ICommandPlugin)]);
 
             loaders.Add(loader);
         }
 
-        List<IPluginCommand> plugins = [];
+        List<ICommandPlugin> plugins = [];
 
         foreach (PluginLoader loader in loaders)
         {
             foreach (Type pluginType in loader
                          .LoadDefaultAssembly()
                          .GetTypes()
-                         .Where(t => typeof(IPluginCommand).IsAssignableFrom(t) && !t.IsAbstract))
+                         .Where(t => typeof(ICommandPlugin).IsAssignableFrom(t) && !t.IsAbstract))
             {
                 // This assumes the implementation of IPlugin has a parameterless constructor
-                if (Activator.CreateInstance(pluginType) is IPluginCommand plugin)
+                if (Activator.CreateInstance(pluginType) is ICommandPlugin plugin)
                 {
                     plugins.Add(plugin);
                 }
@@ -81,9 +80,9 @@ public class Program
             config.SetApplicationName("vellum");
             config.ValidateExamples();
 
-            foreach (IPluginCommand plugin in plugins)
+            foreach (ICommandPlugin plugin in plugins)
             {
-                config.SafetyOff().AddCommand(plugin.Name, plugin.Command.GetType()).WithDescription(plugin.Description);
+                plugin.Configure(config);
             }
         });
 
