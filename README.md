@@ -7,3 +7,7 @@ A first hurdle for supporting this scenario is the ability to add new commands i
 This is a simple PoC to see if this could work. 
 
 The original spike used a vanilla AssemblyLoadContext but this showed some issues resolving Spectre.Console.Cli types, so this second attempt used the [.NET Core Plugins](https://github.com/natemcmaster/DotNetCorePlugins)
+
+## Example
+
+run `SpectreConsoleCliPlugins.exe` with the args `foo foobar -m "Yo!"` - this is configured by default in the `launchSettings.json` file.
